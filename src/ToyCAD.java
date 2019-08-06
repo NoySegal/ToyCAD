@@ -38,6 +38,22 @@ public class ToyCAD {
                 newShape = new Rectangle(shapeColor, new Point[]{vertex1, vertex2});
                 break;
             }
+
+            case "square": {
+                Point center = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
+                double side = Double.parseDouble(stdinArgs[5]);
+                newShape = new Square(shapeColor, center, side);
+                break;
+            }
+
+            case "triangle": {
+                Point vertex1 = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
+                Point vertex2 = new Point(Double.parseDouble(stdinArgs[5]), Double.parseDouble(stdinArgs[6]));
+                Point vertex3 = new Point(Double.parseDouble(stdinArgs[7]), Double.parseDouble(stdinArgs[8]));
+                newShape = new Triangle(shapeColor, new Point[] {vertex1, vertex2, vertex3});
+                break;
+            }
+
             default:
                 System.out.println("Shape not found.");
         }
@@ -48,11 +64,15 @@ public class ToyCAD {
         }
     }
 
+    private static void delShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+        int deleteID = Integer.parseInt(stdinArgs[1]);
+        shapesMap.remove(deleteID);
+    }
+
     private static String getInput(Scanner scanner) {
         String userCommand = scanner.nextLine();
         return userCommand.toLowerCase();
     }
-
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -67,9 +87,10 @@ public class ToyCAD {
             switch (stdinParse[0]) {
                 case "new":
                     setNewShape(stdinParse, shapesMap);
+                    System.out.println(shapesMap);
                     break;
                 case "delete":
-                    //delete shape
+                    delShape(stdinParse, shapesMap);
                     break;
                 case "move":
                     //move shape
