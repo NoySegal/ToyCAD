@@ -9,9 +9,37 @@ public class ToyCAD {
         String shapeColor = stdinArgs[2];
 
         switch (shapeType) {
-            case "circle":
+            case "circle": {
                 double radius = Double.parseDouble(stdinArgs[5]);
-                newShape = new Circle(shapeColor, radius);
+                Point center = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
+                newShape = new Circle(shapeColor, radius, center);
+                break;
+            }
+
+            case "ellipse": {
+                Point focus1 = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
+                Point focus2 = new Point(Double.parseDouble(stdinArgs[5]), Double.parseDouble(stdinArgs[6]));
+                double D = Double.parseDouble(stdinArgs[7]);
+                newShape = new Ellipse(shapeColor, new Point[]{focus1, focus2}, D);
+                break;
+            }
+
+            case "parallelogram": {
+                Point vertex1 = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
+                Point vertex2 = new Point(Double.parseDouble(stdinArgs[5]), Double.parseDouble(stdinArgs[6]));
+                Point vertex3 = new Point(Double.parseDouble(stdinArgs[7]), Double.parseDouble(stdinArgs[8]));
+                newShape = new Parallelogram(shapeColor, new Point[]{vertex1, vertex2, vertex3});
+                break;
+            }
+
+            case "rectangle": {
+                Point vertex1 = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
+                Point vertex2 = new Point(Double.parseDouble(stdinArgs[5]), Double.parseDouble(stdinArgs[6]));
+                newShape = new Rectangle(shapeColor, new Point[]{vertex1, vertex2});
+                break;
+            }
+            default:
+                System.out.println("Shape not found.");
         }
 
         if (newShape != null) {
@@ -28,7 +56,7 @@ public class ToyCAD {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        HashMap<Integer, Shape> shapesMap = new HashMap<Integer, Shape>();
+        HashMap<Integer, Shape> shapesMap = new HashMap<>();
         String userCommand;
         String[] stdinParse;
 
