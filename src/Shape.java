@@ -1,5 +1,4 @@
 public abstract class Shape {
-
     private int ID;
     private static int counter = 0;
     private String color;
