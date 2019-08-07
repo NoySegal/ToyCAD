@@ -25,7 +25,6 @@ public abstract class Shape {
 
     public void moveShape(double xOffset, double yOffset) {
         for (Point point : this.vertices) {
-            System.out.format("X should be %f", point.getX() + xOffset);
             point.setLocation(point.getX() + xOffset, point.getY() + yOffset);
         }
     }
