@@ -6,4 +6,7 @@ public class Point extends Point2D.Double{
         super(x, y);
     }
 
+    public Point(Point point) {
+        super(point.getX(), point.getY());
+    }
 }
