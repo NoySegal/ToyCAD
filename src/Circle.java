@@ -7,4 +7,12 @@ public class Circle extends Ellipse {
         this.radius = radius;
         this.center = center;
     }
+
+    public double getRadius() {
+        return this.radius;
+    }
+
+    public Circle copyShape() {
+        return new Circle(this.getColor(), this.getRadius(), new Point(center));
+    }
 }

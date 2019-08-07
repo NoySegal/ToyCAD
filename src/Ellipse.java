@@ -9,4 +9,13 @@ public class Ellipse extends Shape {
 
     }
 
+    private double getD() {
+        return 2 * this.a;
+    }
+
+    public Ellipse copyShape() {
+        Point[] clonedVertices = Point.copyPoints(this.getVertices());
+        return new Ellipse(this.getColor(), clonedVertices, this.getD());
+    }
+
 }

@@ -12,7 +12,7 @@ public abstract class Shape {
     }
 
     public String getColor() {
-        return this.color;
+        return color;
     }
 
     public void setColor(String newColor) { this.color = newColor; }
@@ -28,4 +28,6 @@ public abstract class Shape {
             point.setLocation(point.getX() + xOffset, point.getY() + yOffset);
         }
     }
+
+    public abstract Shape copyShape();
 }

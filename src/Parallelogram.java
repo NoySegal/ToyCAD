@@ -8,4 +8,9 @@ public class Parallelogram extends Shape {
         Point diagonalPoint = new Point((p[0].getX() + p[2].getX()) / 2, (p[0].getY() + p[2].getY()) / 2);
         return new Point(2 * diagonalPoint.getX() - p[1].getX(), 2 * diagonalPoint.getY() - p[1].getY());
     }
+
+    public Parallelogram copyShape() {
+        Point[] clonedVertices = Point.copyPoints(this.getVertices());
+        return new Parallelogram(this.getColor(), clonedVertices);
+    }
 }

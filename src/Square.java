@@ -13,4 +13,8 @@ public class Square extends Rectangle{
         Point p2 = new Point(center.getX() + 0.5 * side, center.getY() - 0.5 * side);
         return new Point[]{p1, p2};
     }
+
+    public Square copyShape() {
+        return new Square(this.getColor(), new Point(center), this.side);
+    }
 }
