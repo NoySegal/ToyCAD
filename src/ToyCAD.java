@@ -90,8 +90,6 @@ public class ToyCAD {
             moveShape(stdinArgs, shapesMap);
 
             System.out.println("Shape ID: " + copiedShape.getID());
-
-
         }
     }
 
