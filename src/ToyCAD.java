@@ -63,9 +63,36 @@ public class ToyCAD {
         shapesMap.remove(deleteID);
     }
 
+    private static void validateDoubleFormat(String[] stdinArgs) {
+        double tempX = Double.parseDouble(stdinArgs[2]);
+        double tempY = Double.parseDouble(stdinArgs[3]);
+    }
+
     private static void moveShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
         Shape thisShape = shapesMap.get(Integer.parseInt(stdinArgs[1]));
-        thisShape.moveShape(Double.parseDouble(stdinArgs[2]), Double.parseDouble(stdinArgs[3]));
+        if (thisShape == null) {
+            System.out.println("Shape ID not found.");
+        } else {
+            thisShape.moveShape(Double.parseDouble(stdinArgs[2]), Double.parseDouble(stdinArgs[3]));
+        }
+    }
+
+    private static void copyShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+        Shape originalShape = shapesMap.get(Integer.parseInt(stdinArgs[1]));
+        validateDoubleFormat(stdinArgs);
+        if (originalShape == null) {
+            System.out.println("Shape ID not found.");
+        } else {
+            Shape copiedShape = originalShape.copyShape();
+
+            shapesMap.put(copiedShape.getID(), copiedShape);
+            stdinArgs[1] = String.valueOf(copiedShape.getID());
+            moveShape(stdinArgs, shapesMap);
+
+            System.out.println("Shape ID: " + copiedShape.getID());
+
+
+        }
     }
 
     private static String getInput(Scanner scanner) {
@@ -83,36 +110,40 @@ public class ToyCAD {
             userCommand = getInput(scanner);
             stdinParse = userCommand.split(" ");
 
-            switch (stdinParse[0]) {
-                case "new":
-                    setNewShape(stdinParse, shapesMap);
-                    break;
-                case "delete":
-                    delShape(stdinParse, shapesMap);
-                    break;
-                case "move":
-                    moveShape(stdinParse, shapesMap);
-                    break;
-                case "copy":
-                    //copy shape
-                    break;
-                case "area":
-                    //area shape
-                    break;
-                case "color":
-                    //color shape
-                    break;
-                case "circumference":
-                    //circumference shape
-                    break;
-                case "is_inside":
-                    //is_inside shape
-                    break;
-                case "exit":
-                    //exit shape
-                    break session;
-                default:
-                    System.out.println("Command not found.");
+            try {
+                switch (stdinParse[0]) {
+                    case "new":
+                        setNewShape(stdinParse, shapesMap);
+                        break;
+                    case "delete":
+                        delShape(stdinParse, shapesMap);
+                        break;
+                    case "move":
+                        moveShape(stdinParse, shapesMap);
+                        break;
+                    case "copy":
+                        copyShape(stdinParse, shapesMap);
+                        break;
+                    case "area":
+                        //area shape
+                        break;
+                    case "color":
+                        //color shape
+                        break;
+                    case "circumference":
+                        //circumference shape
+                        break;
+                    case "is_inside":
+                        //is_inside shape
+                        break;
+                    case "exit":
+                        //exit shape
+                        break session;
+                    default:
+                        System.out.println("Command not found.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid argument provided.");
             }
         }
 
