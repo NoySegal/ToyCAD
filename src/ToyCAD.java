@@ -15,7 +15,6 @@ public class ToyCAD {
                 newShape = new Circle(shapeColor, radius, center);
                 break;
             }
-
             case "ellipse": {
                 Point focus1 = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
                 Point focus2 = new Point(Double.parseDouble(stdinArgs[5]), Double.parseDouble(stdinArgs[6]));
@@ -23,7 +22,6 @@ public class ToyCAD {
                 newShape = new Ellipse(shapeColor, new Point[]{focus1, focus2}, D);
                 break;
             }
-
             case "parallelogram": {
                 Point vertex1 = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
                 Point vertex2 = new Point(Double.parseDouble(stdinArgs[5]), Double.parseDouble(stdinArgs[6]));
@@ -31,21 +29,18 @@ public class ToyCAD {
                 newShape = new Parallelogram(shapeColor, new Point[]{vertex1, vertex2, vertex3});
                 break;
             }
-
             case "rectangle": {
                 Point vertex1 = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
                 Point vertex2 = new Point(Double.parseDouble(stdinArgs[5]), Double.parseDouble(stdinArgs[6]));
                 newShape = new Rectangle(shapeColor, new Point[]{vertex1, vertex2});
                 break;
             }
-
             case "square": {
                 Point center = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
                 double side = Double.parseDouble(stdinArgs[5]);
                 newShape = new Square(shapeColor, center, side);
                 break;
             }
-
             case "triangle": {
                 Point vertex1 = new Point(Double.parseDouble(stdinArgs[3]), Double.parseDouble(stdinArgs[4]));
                 Point vertex2 = new Point(Double.parseDouble(stdinArgs[5]), Double.parseDouble(stdinArgs[6]));
@@ -53,7 +48,6 @@ public class ToyCAD {
                 newShape = new Triangle(shapeColor, new Point[] {vertex1, vertex2, vertex3});
                 break;
             }
-
             default:
                 System.out.println("Shape not found.");
         }
@@ -67,6 +61,11 @@ public class ToyCAD {
     private static void delShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
         int deleteID = Integer.parseInt(stdinArgs[1]);
         shapesMap.remove(deleteID);
+    }
+
+    private static void moveShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+        Shape thisShape = shapesMap.get(Integer.parseInt(stdinArgs[1]));
+        thisShape.moveShape(Double.parseDouble(stdinArgs[2]), Double.parseDouble(stdinArgs[3]));
     }
 
     private static String getInput(Scanner scanner) {
@@ -87,13 +86,12 @@ public class ToyCAD {
             switch (stdinParse[0]) {
                 case "new":
                     setNewShape(stdinParse, shapesMap);
-                    System.out.println(shapesMap);
                     break;
                 case "delete":
                     delShape(stdinParse, shapesMap);
                     break;
                 case "move":
-                    //move shape
+                    moveShape(stdinParse, shapesMap);
                     break;
                 case "copy":
                     //copy shape
