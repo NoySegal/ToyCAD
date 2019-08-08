@@ -73,7 +73,7 @@ public class ToyCAD {
         if (thisShape == null) {
             System.out.println("Shape ID not found.");
         } else {
-            thisShape.moveShape(Double.parseDouble(stdinArgs[2]), Double.parseDouble(stdinArgs[3]));
+            thisShape.move(Double.parseDouble(stdinArgs[2]), Double.parseDouble(stdinArgs[3]));
         }
     }
 
@@ -83,7 +83,7 @@ public class ToyCAD {
         if (originalShape == null) {
             System.out.println("Shape ID not found.");
         } else {
-            Shape copiedShape = originalShape.copyShape();
+            Shape copiedShape = originalShape.copy();
 
             shapesMap.put(copiedShape.getID(), copiedShape);
             stdinArgs[1] = String.valueOf(copiedShape.getID());
@@ -91,6 +91,48 @@ public class ToyCAD {
 
             System.out.println("Shape ID: " + copiedShape.getID());
         }
+    }
+
+    private static void calcColorArea(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+        double total = 0;
+        String color = stdinArgs[1];
+        for (HashMap.Entry entry : shapesMap.entrySet()) {
+            Shape shape = (Shape) entry.getValue();
+
+            if (shape.getColor().equals(color)) {
+                total += shape.area();
+            }
+        }
+        String strDouble = String.format("%.2f", total);
+        System.out.println("Total area calculated for the color: " + color + ", equals: " + strDouble);
+    }
+
+    private static void printRules() {
+        System.out.println("                Welcome to ToyCAD");
+        System.out.println("        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("        Editor notes:");
+        System.out.println("    -   Shapes supported: Circle, Ellipse, Parallelogram, Rectangle, Square, Triangle.");
+        System.out.println("    -   Colors supported: Blue, Red, Yellow, Green.");
+        System.out.println("    -   No support for overlapping shapes.");
+        System.out.println("        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("                How to use:");
+        System.out.println("    Create new shape:");
+        System.out.println("    -   new circle color x y radius");
+        System.out.println("            >>> Creates new circle with center at (x,y) and radius.");
+        System.out.println("    -   new ellipse color x1 y1 x2 y2 D");
+        System.out.println("            >>> Creates new ellipse with focus points at (x1,y1) & (x2,y2) and D.");
+        System.out.println("            >>> D is the sum of distances in the ellipse plain from the two focus points.");
+        System.out.println("    -   new parallelogram color x1 y1 x2 y2 x3 y3");
+        System.out.println("            >>> Creates new parallelogram with the given 3 vertices.");
+        System.out.println("            >>> vertex1 and vertex3 must be opposing.");
+        System.out.println("    -   new rectangle color x1 y1 x2 y2");
+        System.out.println("            >>> Creates new rectangle with the given 2 vertices .");
+        System.out.println("            >>> vertex1 and vertex2 must be opposing.");
+        System.out.println("    -   new square color x y length");
+        System.out.println("            >>> Creates new square with center at (x,y) and side length.");
+        System.out.println("    -   new triangle color x1 y1 x2 y2 x3 y3");
+        System.out.println("            >>> Creates new triangle with the given 3 vertices.");
+        System.out.println("            >>> vertex1 and vertex3 must be opposing.");
     }
 
     private static String getInput(Scanner scanner) {
@@ -103,6 +145,8 @@ public class ToyCAD {
         HashMap<Integer, Shape> shapesMap = new HashMap<>();
         String userCommand;
         String[] stdinParse;
+
+        printRules();
 
         session: while (true) {
             userCommand = getInput(scanner);
@@ -123,7 +167,7 @@ public class ToyCAD {
                         copyShape(stdinParse, shapesMap);
                         break;
                     case "area":
-                        //area shape
+                        calcColorArea(stdinParse, shapesMap);
                         break;
                     case "color":
                         //color shape
@@ -142,6 +186,8 @@ public class ToyCAD {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid argument provided.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Missing argument/s.");
             }
         }
 

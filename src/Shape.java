@@ -23,11 +23,12 @@ public abstract class Shape {
 
     public Point[] getVertices() { return this.vertices; }
 
-    public void moveShape(double xOffset, double yOffset) {
+    public void move(double xOffset, double yOffset) {
         for (Point point : this.vertices) {
             point.setLocation(point.getX() + xOffset, point.getY() + yOffset);
         }
     }
 
-    public abstract Shape copyShape();
+    public abstract Shape copy();
+    public abstract double area();
 }

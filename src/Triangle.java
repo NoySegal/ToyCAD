@@ -1,11 +1,20 @@
-public class Triangle extends Shape{
+public class Triangle extends Shape {
 
     public Triangle(String color, Point[] vertices) {
         super(color, vertices);
     }
 
-    public Triangle copyShape() {
+    public Triangle copy() {
         Point[] clonedVertices = Point.copyPoints(this.getVertices());
         return new Triangle(this.getColor(), clonedVertices);
+    }
+
+    public double area() {
+        Parallelogram triangleToParallelogram = completeToParallelogram();
+        return triangleToParallelogram.area() / 2;
+    }
+
+    private Parallelogram completeToParallelogram() {
+        return new Parallelogram(this.getColor(), this.getVertices());
     }
 }
