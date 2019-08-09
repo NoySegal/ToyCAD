@@ -2,7 +2,9 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 public class ToyCAD {
-
+    //TODO make shapesMap public static
+    //TODO add separate class for the project
+    //TODO enable multiple projects feature
     private static void setNewShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
         Shape newShape = null;
         String shapeType = stdinArgs[1];
@@ -107,6 +109,15 @@ public class ToyCAD {
         System.out.println("Total area calculated for the color: " + color + ", equals: " + strDouble);
     }
 
+    private static void changeColor(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+        Shape shape = shapesMap.get(Integer.parseInt(stdinArgs[2]));
+        if (shape == null) {
+            System.out.println("Shape ID not found.");
+        } else {
+            shape.setColor(stdinArgs[1]);
+        }
+    }
+
     private static void printRules() {
         System.out.println("                Welcome to ToyCAD");
         System.out.println("        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -114,6 +125,7 @@ public class ToyCAD {
         System.out.println("    -   Shapes supported: Circle, Ellipse, Parallelogram, Rectangle, Square, Triangle.");
         System.out.println("    -   Colors supported: Blue, Red, Yellow, Green.");
         System.out.println("    -   No support for overlapping shapes.");
+        System.out.println("    -   Support for one project per program.");
         System.out.println("        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("                How to use:");
         System.out.println("    Create new shape:");
@@ -133,6 +145,7 @@ public class ToyCAD {
         System.out.println("    -   new triangle color x1 y1 x2 y2 x3 y3");
         System.out.println("            >>> Creates new triangle with the given 3 vertices.");
         System.out.println("            >>> vertex1 and vertex3 must be opposing.");
+        //TODO add documentations
     }
 
     private static String getInput(Scanner scanner) {
@@ -170,16 +183,15 @@ public class ToyCAD {
                         calcColorArea(stdinParse, shapesMap);
                         break;
                     case "color":
-                        //color shape
+                        changeColor(stdinParse, shapesMap);
                         break;
                     case "circumference":
-                        //circumference shape
+                        //TODO circumference shape
                         break;
                     case "is_inside":
-                        //is_inside shape
+                        //TODO is_inside shape
                         break;
                     case "exit":
-                        //exit shape
                         break session;
                     default:
                         System.out.println("Command not found.");
