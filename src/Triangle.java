@@ -1,4 +1,4 @@
-public class Triangle extends Shape {
+public class Triangle extends Polygon {
 
     public Triangle(String color, Point[] vertices) {
         super(color, vertices);

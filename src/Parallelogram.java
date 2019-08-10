@@ -1,4 +1,4 @@
-public class Parallelogram extends Shape {
+public class Parallelogram extends Polygon {
 
     public Parallelogram(String color, Point[] vertices) {
         super(color, new Point[] {vertices[0], vertices[1], vertices[2], getFourthVertex(vertices)});
