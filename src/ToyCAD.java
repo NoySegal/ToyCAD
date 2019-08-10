@@ -118,6 +118,20 @@ public class ToyCAD {
         }
     }
 
+    private static void calcColorCircumference(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+        double total = 0;
+        String color = stdinArgs[1];
+        for (HashMap.Entry entry : shapesMap.entrySet()) {
+            Shape shape = (Shape) entry.getValue();
+
+            if (shape.getColor().equals(color)) {
+                total += shape.circumference();
+            }
+        }
+        String strDouble = String.format("%.2f", total);
+        System.out.println("Total circumference calculated for the color: " + color + ", equals: " + strDouble);
+    }
+
     private static void printRules() {
         System.out.println("                Welcome to ToyCAD");
         System.out.println("        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -186,7 +200,7 @@ public class ToyCAD {
                         changeColor(stdinParse, shapesMap);
                         break;
                     case "circumference":
-                        //TODO circumference shape
+                        calcColorCircumference(stdinParse, shapesMap);
                         break;
                     case "is_inside":
                         //TODO is_inside shape
