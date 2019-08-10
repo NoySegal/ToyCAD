@@ -31,4 +31,11 @@ public class Ellipse extends Shape {
     public double area() {
         return Math.PI * this.getA() * this.getB();
     }
+
+    public double circumference() {
+        double a = this.getA();
+        double b = this.getB();
+        double h = Math.pow(a - b, 2) / Math.pow(a + b, 2);
+        return Math.PI * (a + b) * (1 + (3 * h) / (10 + Math.sqrt(4 - 3 * h)));
+    }
 }

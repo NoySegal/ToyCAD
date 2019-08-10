@@ -31,4 +31,5 @@ public abstract class Shape {
 
     public abstract Shape copy();
     public abstract double area();
+    public abstract double circumference();
 }

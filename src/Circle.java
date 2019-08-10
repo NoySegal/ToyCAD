@@ -15,4 +15,8 @@ public class Circle extends Ellipse {
     public Circle copy() {
         return new Circle(this.getColor(), this.getRadius(), new Point(center));
     }
+
+    public double circumference() {
+        return 2 * Math.PI * this.getRadius();
+    }
 }
