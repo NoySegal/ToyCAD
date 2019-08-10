@@ -3,6 +3,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ShapeTest {
+    double EPSILON = 0.001;
 
     //Coordinates for parallelogram, rectangle, square, triangle
     private Point vertex1 = new Point(-1, 5);
@@ -96,5 +97,26 @@ public class ShapeTest {
 
         //Circle
         assertArrayEquals(verticesCircle, circle.getVertices());
+    }
+
+    @Test
+    public void circumference() {
+        //Circle
+        assertEquals(110.332, circle.circumference(), EPSILON);
+
+        //Ellipse
+        assertEquals(45.814, ellipse.circumference(), EPSILON);
+
+        //Parallelogram
+        assertEquals(24.175, parallelogram.circumference(), EPSILON);
+
+        //Rectangle
+        assertEquals(12, rectangle.circumference(), EPSILON);
+
+        //Square
+        assertEquals(36, square.circumference(), EPSILON);
+
+        //Triangle
+        assertEquals(23.489, triangle.circumference(), EPSILON);
     }
 }

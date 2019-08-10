@@ -42,7 +42,6 @@ public class ShapeTestArea {
 
     @Test
     public void area() {
-
         //Circle
         assertEquals(968.721, circle.area(), EPSILON);
 
