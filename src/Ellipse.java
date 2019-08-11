@@ -38,4 +38,9 @@ public class Ellipse extends Shape {
         double h = Math.pow(a - b, 2) / Math.pow(a + b, 2);
         return Math.PI * (a + b) * (1 + (3 * h) / (10 + Math.sqrt(4 - 3 * h)));
     }
+
+    public boolean isInside(Point point) {
+        Point[] focus = this.getVertices();
+        return (point.distance(focus[0]) + point.distance(focus[1])) <= this.getD();
+    }
 }

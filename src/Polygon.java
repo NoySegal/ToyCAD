@@ -13,4 +13,19 @@ public abstract class Polygon extends Shape {
         }
         return sum;
     }
+
+    public boolean isInside(Point point) {
+        Point[] vertex = this.getVertices();
+        boolean result = false;
+
+        for (int i = 0, j = vertex.length - 1; i < vertex.length; j = i++ ) {
+
+            if ( ((vertex[i].getY() > point.getY()) != (vertex[j].getY() > point.getY())) &&
+                    (point.getX() < (vertex[j].getX() - vertex[i].getX()) * (point.getY() - vertex[i].getY()) /
+                                    (vertex[j].getY() - vertex[i].getY()) + vertex[i].getX()) ) {
+                result = !result;
+            }
+        }
+        return result;
+    }
 }
