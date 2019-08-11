@@ -3,7 +3,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ShapeTest {
-    double EPSILON = 0.001;
+    private static final double EPSILON = 0.001;
 
     //Coordinates for parallelogram, rectangle, square, triangle
     private Point vertex1 = new Point(-1, 5);
@@ -118,5 +118,59 @@ public class ShapeTest {
 
         //Triangle
         assertEquals(23.489, triangle.circumference(), EPSILON);
+    }
+
+    @Test
+    public void isInside() {
+        Point[] randomPoint = new Point[] {new Point(3,2), new Point(-3.5, 1.2), new Point(2, -2),
+                                            new Point(15, 20), new Point(0, 20), new Point(1, 1)};
+
+        //circle
+        assertTrue(circle.isInside(randomPoint[0]));
+        assertTrue(circle.isInside(randomPoint[1]));
+        assertTrue(circle.isInside(randomPoint[2]));
+        assertFalse(circle.isInside(randomPoint[3]));
+        assertFalse(circle.isInside(randomPoint[4]));
+        assertTrue(circle.isInside(randomPoint[5]));
+
+        //Ellipse
+        assertTrue(ellipse.isInside(randomPoint[0]));
+        assertTrue(ellipse.isInside(randomPoint[1]));
+        assertTrue(ellipse.isInside(randomPoint[2]));
+        assertFalse(ellipse.isInside(randomPoint[3]));
+        assertFalse(ellipse.isInside(randomPoint[4]));
+        assertTrue(ellipse.isInside(randomPoint[5]));
+
+        //Parallelogram
+        assertTrue(parallelogram.isInside(randomPoint[0]));
+        assertFalse(parallelogram.isInside(randomPoint[1]));
+        assertTrue(parallelogram.isInside(randomPoint[2]));
+        assertFalse(parallelogram.isInside(randomPoint[3]));
+        assertFalse(parallelogram.isInside(randomPoint[4]));
+        assertTrue(parallelogram.isInside(randomPoint[5]));
+
+        //Rectangle
+        assertFalse(rectangle.isInside(randomPoint[0]));
+        assertFalse(rectangle.isInside(randomPoint[1]));
+        assertFalse(rectangle.isInside(randomPoint[2]));
+        assertFalse(rectangle.isInside(randomPoint[3]));
+        assertFalse(rectangle.isInside(randomPoint[4]));
+        assertFalse(rectangle.isInside(randomPoint[5]));
+
+        //Square
+        assertTrue(square.isInside(randomPoint[0]));
+        assertFalse(square.isInside(randomPoint[1]));
+        assertTrue(square.isInside(randomPoint[2]));
+        assertFalse(square.isInside(randomPoint[3]));
+        assertFalse(square.isInside(randomPoint[4]));
+        assertTrue(square.isInside(randomPoint[5]));
+
+        //Triangle
+        assertTrue(triangle.isInside(randomPoint[0]));
+        assertFalse(triangle.isInside(randomPoint[1]));
+        assertFalse(triangle.isInside(randomPoint[2]));
+        assertFalse(triangle.isInside(randomPoint[3]));
+        assertFalse(triangle.isInside(randomPoint[4]));
+        assertFalse(triangle.isInside(randomPoint[5]));
     }
 }
