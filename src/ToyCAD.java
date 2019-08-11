@@ -65,9 +65,10 @@ public class ToyCAD {
         shapesMap.remove(deleteID);
     }
 
-    private static void validateDoubleFormat(String[] stdinArgs) {
+    private static Point validateDoubleFormat(String[] stdinArgs) {
         double tempX = Double.parseDouble(stdinArgs[2]);
         double tempY = Double.parseDouble(stdinArgs[3]);
+        return new Point(tempX, tempY);
     }
 
     private static void moveShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
@@ -130,6 +131,22 @@ public class ToyCAD {
         }
         String strDouble = String.format("%.2f", total);
         System.out.println("Total circumference calculated for the color: " + color + ", equals: " + strDouble);
+    }
+
+    private static void isInsideShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+        Shape shape = shapesMap.get(Integer.parseInt(stdinArgs[1]));
+        Point point = validateDoubleFormat(stdinArgs);
+
+        if (shape == null) {
+            System.out.println("Shape ID not found.");
+        } else {
+
+            if (shape.isInside(point)) {
+                System.out.println("1");
+            } else {
+                System.out.println("0");
+            }
+        }
     }
 
     private static void printRules() {
@@ -203,7 +220,7 @@ public class ToyCAD {
                         calcColorCircumference(stdinParse, shapesMap);
                         break;
                     case "is_inside":
-                        //TODO is_inside shape
+                        isInsideShape(stdinParse, shapesMap);
                         break;
                     case "exit":
                         break session;
