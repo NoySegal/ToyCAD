@@ -2,10 +2,9 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 public class ToyCAD {
-    //TODO make shapesMap public static
-    //TODO add separate class for the project
-    //TODO enable multiple projects feature
-    private static void setNewShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+    public static HashMap<Integer, Shape> shapesMap;
+
+    private static void setNewShape(String[] stdinArgs) {
         Shape newShape = null;
         String shapeType = stdinArgs[1];
         String shapeColor = stdinArgs[2];
@@ -60,7 +59,7 @@ public class ToyCAD {
         }
     }
 
-    private static void delShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+    private static void delShape(String[] stdinArgs) {
         int deleteID = Integer.parseInt(stdinArgs[1]);
         shapesMap.remove(deleteID);
     }
@@ -71,7 +70,7 @@ public class ToyCAD {
         return new Point(tempX, tempY);
     }
 
-    private static void moveShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+    private static void moveShape(String[] stdinArgs) {
         Shape thisShape = shapesMap.get(Integer.parseInt(stdinArgs[1]));
         if (thisShape == null) {
             System.out.println("Shape ID not found.");
@@ -80,7 +79,7 @@ public class ToyCAD {
         }
     }
 
-    private static void copyShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+    private static void copyShape(String[] stdinArgs) {
         Shape originalShape = shapesMap.get(Integer.parseInt(stdinArgs[1]));
         validateDoubleFormat(stdinArgs);
         if (originalShape == null) {
@@ -90,13 +89,13 @@ public class ToyCAD {
 
             shapesMap.put(copiedShape.getID(), copiedShape);
             stdinArgs[1] = String.valueOf(copiedShape.getID());
-            moveShape(stdinArgs, shapesMap);
+            moveShape(stdinArgs);
 
             System.out.println("Shape ID: " + copiedShape.getID());
         }
     }
 
-    private static void calcColorArea(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+    private static void calcColorArea(String[] stdinArgs) {
         double total = 0;
         String color = stdinArgs[1];
         for (HashMap.Entry entry : shapesMap.entrySet()) {
@@ -110,7 +109,7 @@ public class ToyCAD {
         System.out.println("Total area calculated for the color: " + color + ", equals: " + strDouble);
     }
 
-    private static void changeColor(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+    private static void changeColor(String[] stdinArgs) {
         Shape shape = shapesMap.get(Integer.parseInt(stdinArgs[2]));
         if (shape == null) {
             System.out.println("Shape ID not found.");
@@ -119,7 +118,7 @@ public class ToyCAD {
         }
     }
 
-    private static void calcColorCircumference(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+    private static void calcColorCircumference(String[] stdinArgs) {
         double total = 0;
         String color = stdinArgs[1];
         for (HashMap.Entry entry : shapesMap.entrySet()) {
@@ -133,7 +132,7 @@ public class ToyCAD {
         System.out.println("Total circumference calculated for the color: " + color + ", equals: " + strDouble);
     }
 
-    private static void isInsideShape(String[] stdinArgs, HashMap<Integer, Shape> shapesMap) {
+    private static void isInsideShape(String[] stdinArgs) {
         Shape shape = shapesMap.get(Integer.parseInt(stdinArgs[1]));
         Point point = validateDoubleFormat(stdinArgs);
 
@@ -186,7 +185,7 @@ public class ToyCAD {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        HashMap<Integer, Shape> shapesMap = new HashMap<>();
+        shapesMap = new HashMap<>();
         String userCommand;
         String[] stdinParse;
 
@@ -199,28 +198,31 @@ public class ToyCAD {
             try {
                 switch (stdinParse[0]) {
                     case "new":
-                        setNewShape(stdinParse, shapesMap);
+                        setNewShape(stdinParse);
                         break;
                     case "delete":
-                        delShape(stdinParse, shapesMap);
+                        delShape(stdinParse);
                         break;
                     case "move":
-                        moveShape(stdinParse, shapesMap);
+                        moveShape(stdinParse);
                         break;
                     case "copy":
-                        copyShape(stdinParse, shapesMap);
+                        copyShape(stdinParse);
                         break;
                     case "area":
-                        calcColorArea(stdinParse, shapesMap);
+                        calcColorArea(stdinParse);
                         break;
                     case "color":
-                        changeColor(stdinParse, shapesMap);
+                        changeColor(stdinParse);
                         break;
                     case "circumference":
-                        calcColorCircumference(stdinParse, shapesMap);
+                        calcColorCircumference(stdinParse);
                         break;
                     case "is_inside":
-                        isInsideShape(stdinParse, shapesMap);
+                        isInsideShape(stdinParse);
+                        break;
+                    case "print":
+                        //TODO implement print method
                         break;
                     case "exit":
                         break session;
