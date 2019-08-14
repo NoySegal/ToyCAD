@@ -30,6 +30,12 @@ Print the sketch to the screen:
     >>> width is the number of characters in a line.
     >>> height is the number of lines.
 
+### Notes:
+Currently this program supports only 6 shapes and 4 colors:
+* Ellipse, Circle, Parallelogram, Square, Rectangle, Triangle.
+* Red, Green, Blue, Yellow.
+* No support for overlapping shapes.
+* Support for one project per program.
 
 ### Example:
 
