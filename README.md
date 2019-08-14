@@ -16,17 +16,20 @@ java -jar <PATH>
 After running you will be prompt with the controls guide.
 Some basic controls for example:
 Create new shape:
+
     -   new circle color x y radius
-            >>> Creates new circle with center at (x,y) and radius.
+    >>> Creates new circle with center at (x,y) and radius.
 
 Print the sketch to the screen:
+
+
     -   print width height
-            >>> Prints a visualisation to the screen.
-            >>> width is the number of characters in a line.
-            >>> height is the number of lines.
+    >>> Prints a visualisation to the screen.
+    >>> width is the number of characters in a line.
+    >>> height is the number of lines.
 
 
-![Alt Text](https://gph.is/g/4AQr0lO)
+![Alt Text](https://media.giphy.com/media/iIwQ6r5kgKMhnqUSWA/giphy.gif)
 
 
 ### Example:
@@ -45,4 +48,4 @@ print 80 25
 
 Will yield 4 triangles with a vertex always pointing to the center:
 
-![Alt Text](https://gph.is/g/EGqBAl3)
+![Alt Text](https://media.giphy.com/media/J0BiKXD1ediQvbtdwb/giphy.gif)
