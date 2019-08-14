@@ -3,6 +3,8 @@ Simplified AutoCAD application
 I made this program to learn more about OOP concepts.
 There is also a fun aspect of visualisation to it.
 
+![Alt Text](https://media.giphy.com/media/iIwQ6r5kgKMhnqUSWA/giphy.gif)
+
 ### Prerequisites
 Compiles with Java 8.
 Color display doesn't work for windows cmd prompt (use console emulator).
@@ -27,9 +29,6 @@ Print the sketch to the screen:
     >>> Prints a visualisation to the screen.
     >>> width is the number of characters in a line.
     >>> height is the number of lines.
-
-
-![Alt Text](https://media.giphy.com/media/iIwQ6r5kgKMhnqUSWA/giphy.gif)
 
 
 ### Example:
