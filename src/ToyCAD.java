@@ -148,8 +148,13 @@ public class ToyCAD {
         }
     }
 
+    private static void printSketch(String[] stdinArgs) {
+        Visual work = new Visual(Integer.parseInt(stdinArgs[1]), Integer.parseInt(stdinArgs[2]), shapesMap);
+        work.sketch();
+    }
+
     private static void printRules() {
-        System.out.println("                Welcome to ToyCAD");
+        System.out.println("                \u001B[36mWelcome to ToyCAD\u001B[0m");
         System.out.println("        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("        Editor notes:");
         System.out.println("    -   Shapes supported: Circle, Ellipse, Parallelogram, Rectangle, Square, Triangle.");
@@ -175,7 +180,36 @@ public class ToyCAD {
         System.out.println("    -   new triangle color x1 y1 x2 y2 x3 y3");
         System.out.println("            >>> Creates new triangle with the given 3 vertices.");
         System.out.println("            >>> vertex1 and vertex3 must be opposing.");
-        //TODO add documentations
+        System.out.println("    Delete shape:");
+        System.out.println("    -   delete ID");
+        System.out.println("            >>> Deletes shape with given #ID.");
+        System.out.println("    Move shape:");
+        System.out.println("    -   move ID offset_in_x offset_in_y");
+        System.out.println("            >>> Moves shape with given #ID by the given offsets.");
+        System.out.println("    Copy shape:");
+        System.out.println("    -   copy ID offset_in_x offset_in_y");
+        System.out.println("            >>> Copies shape with given #ID and moves it by the given offsets.");
+        System.out.println("            >>> The Copy command keeps the original shape untouched.");
+        System.out.println("    Calculate area by color:");
+        System.out.println("    -   area color");
+        System.out.println("            >>> Calculates area of all shapes with the specified color.");
+        System.out.println("    Change shape color:");
+        System.out.println("    -   color color_select ID");
+        System.out.println("            >>> Changes shae color with the given ID to the specified color.");
+        System.out.println("    Calculate circumference by color:");
+        System.out.println("    -   circumference color");
+        System.out.println("            >>> Calculates circumference of all shapes with the specified color.");
+        System.out.println("    Determine if a point (x, y) is inside a given shape:");
+        System.out.println("    -   is_inside ID x y");
+        System.out.println("            >>> Determines if the given coordinate is within the shape with given ID.");
+        System.out.println("    Print the sketch to the screen:");
+        System.out.println("    -   print width height");
+        System.out.println("            >>> Prints a visualisation to the screen.");
+        System.out.println("            >>> width is the number of characters in a line.");
+        System.out.println("            >>> height is the number of lines.");
+        System.out.println("    Exit program:");
+        System.out.println("    -   exit");
+        System.out.println("            >>> Exits the program.");
     }
 
     private static String getInput(Scanner scanner) {
@@ -222,7 +256,7 @@ public class ToyCAD {
                         isInsideShape(stdinParse);
                         break;
                     case "print":
-                        //TODO implement print method
+                        printSketch(stdinParse);
                         break;
                     case "exit":
                         break session;
